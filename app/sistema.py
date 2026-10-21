@@ -19,6 +19,13 @@ def validar_solicitud(titulo, tipo, prioridad):
     return None
 
 
+def buscar_solicitud(numero):
+    for solicitud in solicitudes:
+        if solicitud["id"] == numero:
+            return solicitud
+
+    return None
+
 
 def procesar(opcion, titulo="", tipo="", prioridad="", responsable="", numero=0, estado=""):
     global contador
@@ -44,27 +51,33 @@ def procesar(opcion, titulo="", tipo="", prioridad="", responsable="", numero=0,
         return "Solicitud registrada"
 
     elif opcion == 2:
-        for s in solicitudes:
-            if s["id"] == numero:
-                s["responsable"] = responsable
-                return "Responsable asignado"
-        return "Solicitud no encontrada"
+        solicitud = buscar_solicitud(numero)
+
+        if solicitud is None:
+            return "Solicitud no encontrada"
+
+        solicitud["responsable"] = responsable
+        return "Responsable asignado"
 
     elif opcion == 3:
-        for s in solicitudes:
-            if s["id"] == numero:
-                if estado == "PENDIENTE" or estado == "EN_PROCESO" or estado == "RESUELTA":
-                    s["estado"] = estado
-                    return "Estado actualizado"
-                else:
-                    return "Estado invalido"
-        return "Solicitud no encontrada"
+        solicitud = buscar_solicitud(numero)
+
+        if solicitud is None:
+            return "Solicitud no encontrada"
+
+        if estado not in ("PENDIENTE", "EN_PROCESO", "RESUELTA"):
+            return "Estado invalido"
+
+        solicitud["estado"] = estado
+        return "Estado actualizado"
 
     elif opcion == 4:
-        for s in solicitudes:
-            if s["id"] == numero:
-                return str(s)
-        return "Solicitud no encontrada"
+        solicitud = buscar_solicitud(numero)
+
+        if solicitud is None:
+            return "Solicitud no encontrada"
+
+        return str(solicitud)
 
     elif opcion == 5:
         pendientes = 0
