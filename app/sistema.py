@@ -3,33 +3,45 @@ solicitudes = []
 contador = 1
 
 
+def validar_solicitud(titulo, tipo, prioridad):
+    if titulo == "":
+        return "Titulo obligatorio"
+
+    if tipo == "":
+        return "Tipo obligatorio"
+
+    if prioridad == "":
+        return "Prioridad obligatoria"
+
+    if prioridad not in ("ALTA", "MEDIA", "BAJA"):
+        return "Prioridad invalida"
+
+    return None
+
+
+
 def procesar(opcion, titulo="", tipo="", prioridad="", responsable="", numero=0, estado=""):
     global contador
 
     if opcion == 1:
-        if titulo != "":
-            if tipo != "":
-                if prioridad != "":
-                    if prioridad == "ALTA" or prioridad == "MEDIA" or prioridad == "BAJA":
-                        solicitud = {
-                            "id": contador,
-                            "titulo": titulo,
-                            "tipo": tipo,
-                            "prioridad": prioridad,
-                            "responsable": responsable,
-                            "estado": "PENDIENTE"
-                        }
-                        solicitudes.append(solicitud)
-                        contador += 1
-                        return "Solicitud registrada"
-                    else:
-                        return "Prioridad invalida"
-                else:
-                    return "Prioridad obligatoria"
-            else:
-                return "Tipo obligatorio"
-        else:
-            return "Titulo obligatorio"
+        error = validar_solicitud(titulo, tipo, prioridad)
+
+        if error is not None:
+            return error
+
+        solicitud = {
+            "id": contador,
+            "titulo": titulo,
+            "tipo": tipo,
+            "prioridad": prioridad,
+            "responsable": responsable,
+            "estado": "PENDIENTE"
+        }
+
+        solicitudes.append(solicitud)
+        contador += 1
+
+        return "Solicitud registrada"
 
     elif opcion == 2:
         for s in solicitudes:
