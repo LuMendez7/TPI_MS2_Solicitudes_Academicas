@@ -8,12 +8,10 @@ from app import sistema
 def limpiar_datos():
     """Restablece el sistema antes y después de cada prueba."""
     sistema.solicitudes.clear()
-    sistema.contador = 1
 
     yield
 
     sistema.solicitudes.clear()
-    sistema.contador = 1
 
 
 def registrar_solicitud():

@@ -3,7 +3,6 @@ from app.datos_solicitud import DatosSolicitud
 from app.repositorio_solicitudes import RepositorioSolicitudes
 
 solicitudes = []
-contador = 1
 
 
 def validar_solicitud(titulo, tipo, prioridad):
@@ -28,7 +27,6 @@ def buscar_solicitud(numero):
 
 
 def registrar_solicitud(datos: DatosSolicitud):
-    global contador
 
     error = validar_solicitud(
         datos.titulo,
@@ -54,13 +52,11 @@ def registrar_solicitud(datos: DatosSolicitud):
 
     repositorio.agregar(solicitud)
 
-    contador = nuevo_id + 1
 
     return "Solicitud registrada"
 
 
 def procesar(opcion, titulo="", tipo="", prioridad="", responsable="", numero=0, estado=""):
-    global contador
 
 
     if opcion == 1:
