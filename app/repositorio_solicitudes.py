@@ -5,7 +5,11 @@ class RepositorioSolicitudes:
             solicitudes = []
 
         self.solicitudes = solicitudes
-        self.siguiente_id = 1
+
+        self.siguiente_id = max(
+            (solicitud["id"] for solicitud in self.solicitudes),
+            default=0
+        ) + 1
 
     def buscar_por_id(self, numero):
         for solicitud in self.solicitudes:

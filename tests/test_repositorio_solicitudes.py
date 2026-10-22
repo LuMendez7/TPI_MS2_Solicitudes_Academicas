@@ -72,3 +72,14 @@ def test_listar_devuelve_una_copia():
     listado.clear()
 
     assert len(repositorio.listar()) == 1
+
+
+def test_generar_id_con_solicitudes_existentes():
+    solicitudes = [
+        {"id": 1, "titulo": "Solicitud A"},
+        {"id": 3, "titulo": "Solicitud B"},
+    ]
+
+    repositorio = RepositorioSolicitudes(solicitudes)
+
+    assert repositorio.generar_id() == 4

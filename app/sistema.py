@@ -39,8 +39,12 @@ def registrar_solicitud(datos: DatosSolicitud):
     if error is not None:
         return error
 
+    repositorio = RepositorioSolicitudes(solicitudes)
+
+    nuevo_id = repositorio.generar_id()
+
     solicitud = {
-        "id": contador,
+        "id": nuevo_id,
         "titulo": datos.titulo,
         "tipo": datos.tipo,
         "prioridad": datos.prioridad,
@@ -48,8 +52,9 @@ def registrar_solicitud(datos: DatosSolicitud):
         "estado": "PENDIENTE"
     }
 
-    solicitudes.append(solicitud)
-    contador += 1
+    repositorio.agregar(solicitud)
+
+    contador = nuevo_id + 1
 
     return "Solicitud registrada"
 
