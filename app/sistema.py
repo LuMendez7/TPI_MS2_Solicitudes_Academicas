@@ -1,4 +1,7 @@
 
+from app.datos_solicitud import DatosSolicitud
+
+
 solicitudes = []
 contador = 1
 
@@ -27,28 +30,48 @@ def buscar_solicitud(numero):
     return None
 
 
+
+def registrar_solicitud(datos: DatosSolicitud):
+    global contador
+
+    error = validar_solicitud(
+        datos.titulo,
+        datos.tipo,
+        datos.prioridad
+    )
+
+    if error is not None:
+        return error
+
+    solicitud = {
+        "id": contador,
+        "titulo": datos.titulo,
+        "tipo": datos.tipo,
+        "prioridad": datos.prioridad,
+        "responsable": datos.responsable,
+        "estado": "PENDIENTE"
+    }
+
+    solicitudes.append(solicitud)
+    contador += 1
+
+    return "Solicitud registrada"
+
+
 def procesar(opcion, titulo="", tipo="", prioridad="", responsable="", numero=0, estado=""):
     global contador
 
+
     if opcion == 1:
-        error = validar_solicitud(titulo, tipo, prioridad)
+        datos = DatosSolicitud(
+            titulo=titulo,
+            tipo=tipo,
+            prioridad=prioridad,
+            responsable=responsable
+        )
 
-        if error is not None:
-            return error
+        return registrar_solicitud(datos)
 
-        solicitud = {
-            "id": contador,
-            "titulo": titulo,
-            "tipo": tipo,
-            "prioridad": prioridad,
-            "responsable": responsable,
-            "estado": "PENDIENTE"
-        }
-
-        solicitudes.append(solicitud)
-        contador += 1
-
-        return "Solicitud registrada"
 
     elif opcion == 2:
         solicitud = buscar_solicitud(numero)
