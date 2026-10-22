@@ -1,6 +1,6 @@
 
 from app.datos_solicitud import DatosSolicitud
-
+from app.repositorio_solicitudes import RepositorioSolicitudes
 
 solicitudes = []
 contador = 1
@@ -23,12 +23,8 @@ def validar_solicitud(titulo, tipo, prioridad):
 
 
 def buscar_solicitud(numero):
-    for solicitud in solicitudes:
-        if solicitud["id"] == numero:
-            return solicitud
-
-    return None
-
+    repositorio = RepositorioSolicitudes(solicitudes)
+    return repositorio.buscar_por_id(numero)
 
 
 def registrar_solicitud(datos: DatosSolicitud):
