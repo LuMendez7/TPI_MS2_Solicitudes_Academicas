@@ -52,8 +52,7 @@ Prototipo funcional que será utilizado para identificar
 problemas de calidad interna y deuda técnica.
 
 ### Versión refactorizada
-Se desarrollará posteriormente, conservando el
-comportamiento externo mediante pruebas.
+Versión mejorada del Sistema de Gestión de Solicitudes Académicas, desarrollada mediante cuatro refactorizaciones principales y mejoras adicionales en la organización del código. Se incorporaron las clases `DatosSolicitud` y `RepositorioSolicitudes`, se redujo la duplicación de código y se reorganizaron responsabilidades. Los cambios fueron verificados mediante pruebas automatizadas con pytest.
 
 ## Objetivos de calidad
 
@@ -64,7 +63,14 @@ comportamiento externo mediante pruebas.
 - Realizar un code review profesional.
 - Documentar las mejoras y sus evidencias.
 
-## Estado
+**Estado del proyecto:** refactorización y revisión técnica completadas.
 
-Versión inicial desarrollada. Refactorización pendiente.
-```
+Se realizaron cuatro refactorizaciones principales, se incorporaron pruebas automatizadas y se documentaron los resultados del proceso de mejora.
+
+**Resultados de las pruebas:** 23 pruebas aprobadas mediante pytest.
+
+**Cobertura total del código:** 68 % mediante pytest-cov.
+
+**Control de versiones:** historial de commits y etiquetas de Git correspondientes a las etapas de diagnóstico, refactoring, pruebas y documentación.
+
+**Aspectos pendientes de mejora:** ampliar la cobertura de pruebas y continuar separando las responsabilidades concentradas en `sistema.py`.
